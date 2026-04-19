@@ -79,8 +79,8 @@ http://localhost:3000
 ---
 
 ## Screenshots
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](<Screenshot 2026-04-19 120742.png>)
+![alt text](<Screenshot 2026-04-19 115539.png>)
 ---
 
 ## How It Works
