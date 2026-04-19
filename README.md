@@ -79,15 +79,8 @@ http://localhost:3000
 ---
 
 ## Screenshots
-
-(Add your project screenshots here)
-
-Example:
-
-* Chat interface
-* Message bubbles
-* Multiple users chatting
-
+![alt text](image-2.png)
+![alt text](image-3.png)
 ---
 
 ## How It Works
