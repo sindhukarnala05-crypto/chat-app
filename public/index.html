@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aesthetic Chat App</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
+
+#chat-container {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 60%;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 15px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+.sent {
+    background: #4facfe;
+    align-self: flex-end;
+    margin-left: auto;
+    border-bottom-right-radius: 0;
+}
+
+.received {
+    background: rgba(255,255,255,0.1);
+    border-bottom-left-radius: 0;
+}
+
+.meta {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+#input-area {
+    display: flex;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+
+#msg {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 20px;
+    background: #00c6ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #0072ff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+</head>
+<body>
+
+<header>💬 Real-Time Chat</header>
+
+<div id="chat-container"></div>
+
+<div id="input-area">
+    <input id="msg" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+const socket = io();
+const username = prompt("Enter your name:");
+
+function getTime() {
+    const now = new Date();
+    return now.getHours() + ":" + now.getMinutes().toString().padStart(2, '0');
+}
+
+function sendMessage() {
+    const input = document.getElementById("msg");
+    if (input.value.trim() === "") return;
+
+    const messageData = {
+        user: username,
+        text: input.value,
+        time: getTime()
+    };
+
+    socket.emit("chat message", messageData);
+    input.value = "";
+}
+
+socket.on("chat message", (data) => {
+    const chat = document.getElementById("chat-container");
+
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("message");
+
+    if (data.user === username) {
+        msgDiv.classList.add("sent");
+    } else {
+        msgDiv.classList.add("received");
+    }
+
+    msgDiv.innerHTML = `
+        <strong>${data.user}</strong><br>
+        ${data.text}
+        <div class="meta">${data.time}</div>
+    `;
+
+    chat.appendChild(msgDiv);
+    chat.scrollTop = chat.scrollHeight;
+});
+</script>
+
+</body>
+</html>
