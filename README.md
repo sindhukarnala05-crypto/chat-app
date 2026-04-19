@@ -53,12 +53,11 @@ cd chat-app
 ```
 
 ### 2. Install dependencies
-bash
+```bash
 npm install
 ### 3. Run the server
 ```bash
 node server.js
-```
 ### 4. Open in browser
 ```
 http://localhost:3000
