@@ -53,24 +53,36 @@ cd chat-app
 ```
 
 ### 2. Install dependencies
+
 ```bash
 npm install
+```
+
 ### 3. Run the server
+
 ```bash
 node server.js
+```
+
 ### 4. Open in browser
+
 ```
 http://localhost:3000
 ```
+
 ### 5. Test the application
+
 * Open multiple tabs in your browser
 * Enter different usernames
 * Start chatting in real-time
+
 ---
 
 ## Screenshots
-![alt text](image.png)
-![alt text](image-1.png)
+
+(Add your project screenshots here)
+
+Example:
 
 * Chat interface
 * Message bubbles
@@ -132,7 +144,7 @@ chat-app/
 
 ---
 
-## Author
+## 👤 Author
 
 K.Sindhu Sahithi
 
